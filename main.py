@@ -1,4 +1,4 @@
-from classes.AvaliabilityMonitor import AvaliabilityMonitor
+from classes.PriceMonitor import PriceMonitor
 from classes.WebScraper import WebScraper
 from classes.Product import Product
 from os.path import isfile, join
@@ -10,10 +10,10 @@ def Help():
     print('Web Scraper: Uses a config file to explore a website and extract all products and prices to a file in data/\"Website Name\"/Discovered.txt')
     print('An example of this file can be found in data/web/example.json')
     print('If no configuration file is provided it will execute all configuration files present in data/web/ directory')
-    print('Usage: wsam -Ws [web_congig_file]')
+    print('Usage: wspm -Ws [web_congig_file]')
     print('')
-    print('Avaliability Monitor: Checks if the product\'s price discovered by a previous execution of the Web Scrapper functionality is below a threshold specified by you')
-    print('Usage: wsam -Am [product_file] [user_config]')
+    print('Price Monitor: Checks if the product\'s price discovered by a previous execution of the Web Scrapper functionality is below a threshold specified by you')
+    print('Usage: wspm -Pm [product_file] [user_config]')
 
 def WebScraping(config_file = None):
     if(config_file != None):
@@ -25,23 +25,23 @@ def WebScraping(config_file = None):
             web = WebScraper(config_file)
             web.Search()
 
-def AvaliabilityMonitoring(product_file = None, user_config = None):
+def PriceMonitoring(product_file = None, user_config = None):
     if(product_file != None):
-        monitor = AvaliabilityMonitor(product_file, user_config)
+        monitor = PriceMonitor(product_file, user_config)
         monitor.Check()
     else:
         filenames = []
         for filename in glob.iglob("data/" + '**/*.txt', recursive=True):
             filenames.append(filename)
-        monitor = AvaliabilityMonitor(filenames, user_config)
+        monitor = PriceMonitor(filenames, user_config)
         monitor.Check()
         
 
 def main():
 
-    print('Welcome to this web scraper and avalibility monitor made in Python 3.9 by Joselu21')
+    print('Welcome to this web scraper and price monitor made in Python 3.9 by Joselu21')
     print('Don\'t forget to check the github respository for updates that can improve the performance or fix errors' )
-    print('https://github.com/Joselu21/*****')
+    print('https://github.com/Joselu21/WSPM')
 
     opts = [opt for opt in sys.argv[1:] if opt.startswith("-")]
 
@@ -54,13 +54,13 @@ def main():
         else:
             print('Invalid call format, please read the help below \n')
             Help()
-    elif ("-Am" in opts):
-        product_index = sys.argv.index("-Am") + 1
-        user_index = sys.argv.index("-Am") + 2
+    elif ("-Pm" in opts):
+        product_index = sys.argv.index("-Pm") + 1
+        user_index = sys.argv.index("-Pm") + 2
         if(len(sys.argv) - user_index > 0):
-            AvaliabilityMonitoring(sys.argv[product_index], sys.argv[user_index])
+            PriceMonitoring(sys.argv[product_index], sys.argv[user_index])
         elif(len(sys.argv) - product_index > 0):
-            AvaliabilityMonitoring(sys.argv[product_index])
+            PriceMonitoring(sys.argv[product_index])
         else:
             print('Invalid call format, please read the help below \n')
             Help()

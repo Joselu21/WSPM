@@ -2,7 +2,7 @@ from .Parsers.ProductsParser import ProductParser
 from .Parsers.UserConfigParser import UserConfigParser, UserInfo, Threshold
 from .Product import Product
 
-class AvaliabilityMonitor:
+class PriceMonitor:
 
     products_to_monitor = []
     user_info = None
