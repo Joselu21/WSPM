@@ -1,0 +1,22 @@
+{
+    "name" : "Joselu21",
+    "email" : "joseluissilvestregarcia@gmail.com",
+    "thresholds" : [
+        {
+            "product_name" : ["3060"],
+            "price_threshold" : "450"
+        },
+        {
+            "product_name" : ["3060", "Ti"],
+            "price_threshold" : "500"
+        },
+        {
+            "product_name" : ["3070"],
+            "price_threshold" : "550"
+        },
+        {
+            "product_name" : ["3070", "Ti"],
+            "price_threshold" : "600"            
+        }
+    ]
+}
